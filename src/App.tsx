@@ -1,8 +1,10 @@
 import React, { useEffect, useInsertionEffect } from 'react';
-import './App.scss';
+import './styles/App.scss';
 import { fetchUsers, userSlice } from './store/reducers/UserSlice';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import PostContainer from './components/PostContainer/PostContainer';
+import Header from './components/Header/Header';
+import Layout from './components/Layout/Layout';
 
 function App() {
 	const dispatch = useAppDispatch();
@@ -15,21 +17,25 @@ function App() {
 
 	return (
 		<div className='App'>
-			<h1>{count}</h1>
-			<button onClick={() => dispatch(increment(1))}>Increment</button>
-			<PostContainer />
-			{/* {isLoading && <h1>идет загрузка</h1>} */}
-			{!isLoading
-				? users.map((user) => {
-						return (
-							<>
-								<h1>{user.id}</h1>
-								<h2>{user.name}</h2>
-							</>
-						);
-				  })
-				: null}
+			<Layout/>
 		</div>
+		// <div className='App'>
+		// 	<Header />
+		// 	<h1>{count}</h1>
+		// 	<button onClick={() => dispatch(increment(1))}>Increment</button>
+		// 	<PostContainer />
+		// 	{/* {isLoading && <h1>идет загрузка</h1>} */}
+		// 	{!isLoading
+		// 		? users.map((user) => {
+		// 				return (
+		// 					<>
+		// 						<h1>{user.id}</h1>
+		// 						<h2>{user.name}</h2>
+		// 					</>
+		// 				);
+		// 		  })
+		// 		: null}
+		// </div>
 	);
 }
 
