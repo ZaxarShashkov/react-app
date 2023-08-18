@@ -17,24 +17,26 @@ function App() {
 
 	return (
 		<div className='App'>
-			<Layout/>
+			<Layout children={<PostContainer />} />
+			{/* <PostContainer />
+			{!isLoading
+				? users.map((user) => {
+						return (
+							<>
+								<h1>{user.id}</h1>
+								<h2>{user.name}</h2>
+							</>
+						);
+				  })
+				: null} */}
 		</div>
 		// <div className='App'>
 		// 	<Header />
 		// 	<h1>{count}</h1>
 		// 	<button onClick={() => dispatch(increment(1))}>Increment</button>
-		// 	<PostContainer />
+
 		// 	{/* {isLoading && <h1>идет загрузка</h1>} */}
-		// 	{!isLoading
-		// 		? users.map((user) => {
-		// 				return (
-		// 					<>
-		// 						<h1>{user.id}</h1>
-		// 						<h2>{user.name}</h2>
-		// 					</>
-		// 				);
-		// 		  })
-		// 		: null}
+
 		// </div>
 	);
 }

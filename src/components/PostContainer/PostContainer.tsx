@@ -2,10 +2,11 @@ import React from 'react';
 import { postApi } from '../../services/PostService';
 import PostItem from '../PostItem/PostItem';
 import { IPost } from '../../interfaces/IPost';
+import styles from './PostContainer.module.scss';
 
 type Props = {};
 
-const PostContainer = (props: Props) => {
+const PostContainer = (props: Props): JSX.Element => {
 	const {
 		data: posts,
 		isLoading,
@@ -35,8 +36,8 @@ const PostContainer = (props: Props) => {
 	};
 
 	return (
-		<div>
-			<button onClick={handleCreate}>add post</button>
+		<div className={styles.container}>
+			{/* <button onClick={handleCreate}>add post</button> */}
 			{isLoading && <h1>Идет загрузка постов ...</h1>}
 			{error && <h1>Произошла ошибка</h1>}
 			{posts?.map((post) => {

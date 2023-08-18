@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+
+.button {
+	display: flex;
+	align-items: center;
+	background-color: var(--white);
+	color: var(--grey-dark);
+	border: 1px solid var(--grey-light);
+	border-radius: 6px;
+	cursor: pointer;
+	&:hover {
+		color: var(--black);
+		transition: all 0.25 ease-in;
+	}
+}

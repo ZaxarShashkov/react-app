@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styles from './Layout.module.scss';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 
-type Props = {};
+type LayoutProps = {
+	children: ReactNode;
+};
 
-const Layout = (props: Props) => {
+const Layout = ({ children }: LayoutProps): JSX.Element => {
 	return (
 		<div className={styles.wrapper}>
 			<Header className={styles.header} />
-			<Sidebar className={styles.sidebar}/>
-			<div className={styles.main}>main</div>
+			<Sidebar className={styles.sidebar} />
+			<main className={styles.main}>{children}</main>
 			<footer className={styles.footer}>footer</footer>
 		</div>
 	);
