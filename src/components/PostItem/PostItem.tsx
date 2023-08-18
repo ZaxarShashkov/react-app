@@ -24,13 +24,11 @@ const PostItem = ({ post, remove, update }: PropsPost) => {
 	return (
 		<div className={styles.post__container} onClick={handleUpdate}>
 			<div className={styles.post__title_block}>
-				<p className={styles.post__number}>{post.id}:</p>
-				<Paragraph text={post.id + ':'} />
-				<p className={styles.post__title}>{post.title}</p>
+				<Paragraph text={post.id + ':'} size={'large'} />
+				<Paragraph text={post.title} />
 			</div>
-			<p className={styles.post__text}>{post.body}</p>
+			<Paragraph text={post.body} size={'small'} />
 			<Button title='Remove' onClick={handleRemove} />
-			{/* <button onClick={handleRemove}>remove</button> */}
 		</div>
 	);
 };

@@ -1,10 +1,6 @@
 @import '../../styles/variables.scss';
 
 .post {
-	&__number {
-		font-size: 16px;
-		font-weight: 600;
-	}
 	&__container {
 		border: 1px solid var(--grey-light);
 		padding: 10px;
@@ -14,5 +10,6 @@
 
 .post__title_block {
 	display: flex;
+	align-items: center;
 	gap: 10px;
 }
