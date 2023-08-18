@@ -2,6 +2,9 @@
 
 .post {
 	&__container {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 75px 170px 20px;
 		border: 1px solid var(--grey-light);
 		padding: 10px;
 		border-radius: 6px;

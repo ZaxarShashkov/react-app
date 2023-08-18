@@ -3,10 +3,14 @@
 .button {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	background-color: var(--white);
 	color: var(--grey-dark);
 	border: 1px solid var(--grey-light);
 	border-radius: 6px;
+	width: 70px;
+	height: 25px;
+	// margin-top: 15px;
 	cursor: pointer;
 	&:hover {
 		color: var(--black);

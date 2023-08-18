@@ -28,7 +28,9 @@ const PostItem = ({ post, remove, update }: PropsPost) => {
 				<Paragraph text={post.title} />
 			</div>
 			<Paragraph text={post.body} size={'small'} />
-			<Button title='Remove' onClick={handleRemove} />
+			<div className={styles.post__footer}>
+				<Button title='Remove' onClick={handleRemove} />
+			</div>
 		</div>
 	);
 };
