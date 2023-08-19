@@ -8,11 +8,10 @@ type PropsPost = {
 	post: IPost;
 	remove: (post: IPost) => void;
 	update: (post: IPost) => void;
-	isVisible: boolean;
-	setIsVisible: (isVisible: boolean) => void;
+	onVisible: () => void;
 };
 
-const PostItem = ({ post, remove, update, setIsVisible, isVisible }: PropsPost) => {
+const PostItem = ({ post, remove, update, onVisible }: PropsPost) => {
 	const handleRemove = (event: React.MouseEvent) => {
 		event.stopPropagation();
 		remove(post);
@@ -32,7 +31,7 @@ const PostItem = ({ post, remove, update, setIsVisible, isVisible }: PropsPost) 
 			<Paragraph text={post.body} size={'small'} />
 			<div className={styles.post__footer}>
 				<Button title='Remove' onClick={handleRemove} />
-				<Button title='Change post' onClick={(isVisible) => setIsVisible(!isVisible)} />
+				<Button title='Change post' onClick={onVisible} />
 			</div>
 		</div>
 	);

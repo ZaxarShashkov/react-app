@@ -3,6 +3,7 @@ import { postApi } from '../../services/PostService';
 import PostItem from '../PostItem/PostItem';
 import { IPost } from '../../interfaces/IPost';
 import styles from './PostContainer.module.scss';
+import Modal from '../UI/Modal/Modal';
 
 type Props = {};
 
@@ -37,18 +38,24 @@ const PostContainer = (props: Props): JSX.Element => {
 		updatePost(post);
 	};
 
+	const onVisible = () => {
+		setIsVisible(true);
+	};
+
+	console.log(isVisible);
+
 	return (
 		<div className={styles.container}>
 			{/* <button onClick={handleCreate}>add post</button> */}
 			{isLoading && <h1>Идет загрузка постов ...</h1>}
 			{error && <h1>Произошла ошибка</h1>}
+			<Modal isVisible={isVisible} setIsVisible={setIsVisible} />
 			{posts?.map((post) => {
 				return (
 					<PostItem
 						remove={handleRemove}
 						update={handleUpdate}
-						setIsVisible={setIsVisible}
-						isVisible={isVisible}
+						onVisible={onVisible}
 						key={post.id}
 						post={post}
 					/>
