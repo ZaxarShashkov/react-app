@@ -9,10 +9,12 @@
 		padding: 10px;
 		border-radius: 6px;
 	}
+	&__footer {
+		display: flex;
+		gap: 10px;
+	}
 }
 
 .post__title_block {
 	display: flex;
-	align-items: center;
-	gap: 10px;
 }

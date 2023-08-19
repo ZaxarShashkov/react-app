@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { postApi } from '../../services/PostService';
 import PostItem from '../PostItem/PostItem';
 import { IPost } from '../../interfaces/IPost';
@@ -7,6 +7,8 @@ import styles from './PostContainer.module.scss';
 type Props = {};
 
 const PostContainer = (props: Props): JSX.Element => {
+	const [isVisible, setIsVisible] = useState<boolean>(false);
+
 	const {
 		data: posts,
 		isLoading,
@@ -45,6 +47,8 @@ const PostContainer = (props: Props): JSX.Element => {
 					<PostItem
 						remove={handleRemove}
 						update={handleUpdate}
+						setIsVisible={setIsVisible}
+						isVisible={isVisible}
 						key={post.id}
 						post={post}
 					/>

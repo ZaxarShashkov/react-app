@@ -8,9 +8,8 @@
 	color: var(--grey-dark);
 	border: 1px solid var(--grey-light);
 	border-radius: 6px;
-	width: 70px;
+	max-width: 100px;
 	height: 25px;
-	// margin-top: 15px;
 	cursor: pointer;
 	&:hover {
 		color: var(--black);

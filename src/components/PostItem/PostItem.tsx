@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IPost } from '../../interfaces/IPost';
 import styles from './PostItem.module.scss';
 import Button from '../UI/Button/Button';
@@ -8,9 +8,11 @@ type PropsPost = {
 	post: IPost;
 	remove: (post: IPost) => void;
 	update: (post: IPost) => void;
+	isVisible: boolean;
+	setIsVisible: (isVisible: boolean) => void;
 };
 
-const PostItem = ({ post, remove, update }: PropsPost) => {
+const PostItem = ({ post, remove, update, setIsVisible, isVisible }: PropsPost) => {
 	const handleRemove = (event: React.MouseEvent) => {
 		event.stopPropagation();
 		remove(post);
@@ -22,7 +24,7 @@ const PostItem = ({ post, remove, update }: PropsPost) => {
 	};
 
 	return (
-		<div className={styles.post__container} onClick={handleUpdate}>
+		<div className={styles.post__container}>
 			<div className={styles.post__title_block}>
 				<Paragraph text={post.id + ':'} size={'large'} />
 				<Paragraph text={post.title} />
@@ -30,6 +32,7 @@ const PostItem = ({ post, remove, update }: PropsPost) => {
 			<Paragraph text={post.body} size={'small'} />
 			<div className={styles.post__footer}>
 				<Button title='Remove' onClick={handleRemove} />
+				<Button title='Change post' onClick={(isVisible) => setIsVisible(!isVisible)} />
 			</div>
 		</div>
 	);
