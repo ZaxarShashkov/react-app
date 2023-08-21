@@ -25,10 +25,7 @@ const PostItem = ({ post, remove, update }: PropsPost) => {
 		remove(post);
 	};
 
-	const handleUpdate = (event: React.MouseEvent) => {
-		const title = prompt() || '';
-		update({ ...post, title });
-	};
+	
 
 	const onVisible = () => {
 		setIsVisible(true);
@@ -51,6 +48,8 @@ const PostItem = ({ post, remove, update }: PropsPost) => {
 				setIsVisible={setIsVisible}
 				changePost={changePost}
 				setChangePost={setChangePost}
+				update={update}
+				post={post}
 			/>
 		</div>
 	);

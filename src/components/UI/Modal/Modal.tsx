@@ -3,15 +3,25 @@ import styles from './Modal.module.scss';
 import cn from 'classnames';
 import Button from '../Button/Button';
 import { ChangePost } from '../../PostItem/PostItem';
+import { IPost } from '../../../interfaces/IPost';
 
 type ModalProps = {
 	isVisible: boolean;
 	changePost: ChangePost;
 	setIsVisible: (isVisible: boolean) => void;
 	setChangePost: (changePost: ChangePost) => void;
+	update: (post: IPost) => void;
+	post: IPost;
 };
 
-const Modal = ({ isVisible, setIsVisible, changePost, setChangePost }: ModalProps) => {
+const Modal = ({
+	isVisible,
+	setIsVisible,
+	changePost,
+	setChangePost,
+	update,
+	post,
+}: ModalProps) => {
 	const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
 		console.log(changePost);
 		setChangePost({ ...changePost, title: e.currentTarget.value });
@@ -20,6 +30,12 @@ const Modal = ({ isVisible, setIsVisible, changePost, setChangePost }: ModalProp
 	const onChangeBody = (e: ChangeEvent<HTMLInputElement>) => {
 		console.log(changePost);
 		setChangePost({ ...changePost, body: e.currentTarget.value });
+	};
+
+	const handleUpdate = (event: React.MouseEvent) => {
+		const { title, body } = changePost;
+		update({ ...post, title, body });
+		setIsVisible(false);
 	};
 
 	return (
@@ -42,6 +58,7 @@ const Modal = ({ isVisible, setIsVisible, changePost, setChangePost }: ModalProp
 						className={styles.modal__input}
 						placeholder='Enter your title post'
 						onChange={onChangeTitle}
+						autoComplete='false'
 					/>
 				</div>
 				<div className={styles.modal__text}>
@@ -53,10 +70,11 @@ const Modal = ({ isVisible, setIsVisible, changePost, setChangePost }: ModalProp
 						className={styles.modal__input}
 						placeholder='Enter your body post'
 						onChange={onChangeBody}
+						autoComplete='false'
 					/>
 				</div>
 				<div className={styles.modal__buttons}>
-					<Button title={'save'} onClick={(isVisible) => setIsVisible(!isVisible)} />
+					<Button title={'save'} onClick={handleUpdate} />
 					<Button title={'back'} onClick={(isVisible) => setIsVisible(!isVisible)} />
 				</div>
 			</div>
