@@ -3,15 +3,23 @@ import { IPost } from '../../interfaces/IPost';
 import styles from './PostItem.module.scss';
 import Button from '../UI/Button/Button';
 import Paragraph from '../UI/Paragraph/Paragraph';
+import Modal from '../UI/Modal/Modal';
 
 type PropsPost = {
 	post: IPost;
 	remove: (post: IPost) => void;
 	update: (post: IPost) => void;
-	onVisible: () => void;
 };
 
-const PostItem = ({ post, remove, update, onVisible }: PropsPost) => {
+export interface ChangePost {
+	title: string;
+	body: string;
+}
+
+const PostItem = ({ post, remove, update }: PropsPost) => {
+	const [changePost, setChangePost] = useState<ChangePost>({ title: '', body: '' });
+	const [isVisible, setIsVisible] = useState<boolean>(false);
+
 	const handleRemove = (event: React.MouseEvent) => {
 		event.stopPropagation();
 		remove(post);
@@ -20,6 +28,10 @@ const PostItem = ({ post, remove, update, onVisible }: PropsPost) => {
 	const handleUpdate = (event: React.MouseEvent) => {
 		const title = prompt() || '';
 		update({ ...post, title });
+	};
+
+	const onVisible = () => {
+		setIsVisible(true);
 	};
 
 	return (
@@ -33,6 +45,13 @@ const PostItem = ({ post, remove, update, onVisible }: PropsPost) => {
 				<Button title='Remove' onClick={handleRemove} />
 				<Button title='Change post' onClick={onVisible} />
 			</div>
+
+			<Modal
+				isVisible={isVisible}
+				setIsVisible={setIsVisible}
+				changePost={changePost}
+				setChangePost={setChangePost}
+			/>
 		</div>
 	);
 };

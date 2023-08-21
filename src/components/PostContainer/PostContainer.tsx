@@ -8,7 +8,7 @@ import Modal from '../UI/Modal/Modal';
 type Props = {};
 
 const PostContainer = (props: Props): JSX.Element => {
-	const [isVisible, setIsVisible] = useState<boolean>(false);
+
 
 	const {
 		data: posts,
@@ -38,24 +38,21 @@ const PostContainer = (props: Props): JSX.Element => {
 		updatePost(post);
 	};
 
-	const onVisible = () => {
-		setIsVisible(true);
-	};
 
-	console.log(isVisible);
+
+
 
 	return (
 		<div className={styles.container}>
 			{/* <button onClick={handleCreate}>add post</button> */}
 			{isLoading && <h1>Идет загрузка постов ...</h1>}
 			{error && <h1>Произошла ошибка</h1>}
-			<Modal isVisible={isVisible} setIsVisible={setIsVisible} />
+			
 			{posts?.map((post) => {
 				return (
 					<PostItem
 						remove={handleRemove}
 						update={handleUpdate}
-						onVisible={onVisible}
 						key={post.id}
 						post={post}
 					/>
