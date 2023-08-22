@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import { postApi } from '../../services/PostService';
-import PostItem, { ChangePost } from '../PostItem/PostItem';
+import PostItem from '../PostItem/PostItem';
 import { IPost } from '../../interfaces/IPost';
 import styles from './PostContainer.module.scss';
-import Modal from '../UI/Modal/Modal';
 import Button from '../UI/Button/Button';
+import Input from '../UI/Input/Input';
 
-type Props = {};
+interface NewPost {
+	title: string;
+	body: string;
+}
 
-const PostContainer = (props: Props): JSX.Element => {
-	const [isVisible, setIsVisible] = useState<boolean>(false);
-	const [changePost, setChangePost] = useState<ChangePost>({ title: '', body: '' });
+const PostContainer = (): JSX.Element => {
+	const [newPost, setNewPost] = useState<NewPost>({ title: '', body: '' });
 
 	const {
 		data: posts,
@@ -27,9 +29,8 @@ const PostContainer = (props: Props): JSX.Element => {
 	const [updatePost, {}] = postApi.useUpdatePostMutation();
 
 	const handleCreate = async () => {
-		const title = prompt();
-		console.log(title);
-		await createPost({ title, body: title } as IPost);
+		await createPost({ title: newPost.title, body: newPost.body } as IPost);
+		setNewPost({ title: '', body: '' });
 	};
 
 	const handleRemove = (post: IPost) => {
@@ -40,16 +41,35 @@ const PostContainer = (props: Props): JSX.Element => {
 		updatePost(post);
 	};
 
+	const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+		setNewPost({ ...newPost, title: e.currentTarget.value });
+	};
+
+	const handleChangeBody = (e: ChangeEvent<HTMLInputElement>) => {
+		setNewPost({ ...newPost, body: e.currentTarget.value });
+	};
+
 	return (
 		<>
 			<div className={styles.container__head}>
-				<Button title='Create new post' onClick={() => setIsVisible(true)} />
+				<Button title='Create new post' onClick={handleCreate} />
+				<Input
+					label='Title'
+					placeholder='Enter new title'
+					value={newPost.title}
+					onChange={handleChangeTitle}
+				/>
+				<Input
+					label='Body'
+					placeholder='Enter new body'
+					value={newPost.body}
+					onChange={handleChangeBody}
+				/>
 			</div>
 			<div className={styles.container}>
 				{/* <button onClick={handleCreate}>add post</button> */}
 				{isLoading && <h1>Идет загрузка постов ...</h1>}
 				{error && <h1>Произошла ошибка</h1>}
-
 				{posts?.map((post) => {
 					return (
 						<PostItem
