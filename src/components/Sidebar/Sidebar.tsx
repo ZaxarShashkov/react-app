@@ -14,6 +14,7 @@ const Sidebar = ({ className }: SidebarProps) => {
 					<li className={styles.main__menu_item}>Posts</li>
 					<li className={styles.main__menu_item}>Albums</li>
 					<li className={styles.main__menu_item}>Etc</li>
+					
 				</ul>
 			</nav>
 		</main>

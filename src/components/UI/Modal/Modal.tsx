@@ -32,7 +32,7 @@ const Modal = ({
 		setChangePost({ ...changePost, body: e.currentTarget.value });
 	};
 
-	const handleUpdate = (event: React.MouseEvent) => {
+	const handleUpdate = () => {
 		const { title, body } = changePost;
 		update({ ...post, title, body });
 		setIsVisible(false);
