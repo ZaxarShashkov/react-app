@@ -5,6 +5,7 @@ import { IPost } from '../../interfaces/IPost';
 import styles from './PostContainer.module.scss';
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
+import Select from '../UI/Select/Select';
 
 interface NewPost {
 	title: string;
@@ -69,6 +70,7 @@ const PostContainer = (): JSX.Element => {
 					value={newPost.body}
 					onChange={handleChangeBody}
 				/>
+				<Select />
 			</div>
 			<div className={styles.container}>
 				{/* <button onClick={handleCreate}>add post</button> */}
