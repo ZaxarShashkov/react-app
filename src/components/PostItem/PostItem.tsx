@@ -9,6 +9,7 @@ type PropsPost = {
 	post: IPost;
 	remove: (post: IPost) => void;
 	update: (post: IPost) => void;
+	number: number;
 };
 
 export interface ChangePost {
@@ -16,7 +17,7 @@ export interface ChangePost {
 	body: string;
 }
 
-const PostItem = ({ post, remove, update }: PropsPost) => {
+const PostItem = ({ post, remove, update, number }: PropsPost) => {
 	const [changePost, setChangePost] = useState<ChangePost>({ title: '', body: '' });
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -25,8 +26,6 @@ const PostItem = ({ post, remove, update }: PropsPost) => {
 		remove(post);
 	};
 
-	
-
 	const onVisible = () => {
 		setIsVisible(true);
 	};
@@ -34,7 +33,7 @@ const PostItem = ({ post, remove, update }: PropsPost) => {
 	return (
 		<div className={styles.post__container}>
 			<div className={styles.post__title_block}>
-				<Paragraph text={post.id + ':'} size={'large'} />
+				<Paragraph text={number + 1 + ':'} size={'large'} />
 				<Paragraph text={post.title} />
 			</div>
 			<Paragraph text={post.body} size={'small'} />

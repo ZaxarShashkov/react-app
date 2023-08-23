@@ -13,14 +13,18 @@ interface NewPost {
 
 const PostContainer = (): JSX.Element => {
 	const [newPost, setNewPost] = useState<NewPost>({ title: '', body: '' });
+	const [order, setOrder] = useState<string>('desc');
 
 	const {
 		data: posts,
 		isLoading,
 		error,
-	} = postApi.useFetchAllPostsQuery(100, {
-		// pollingInterval: 1000,
-	});
+	} = postApi.useFetchAllPostsQuery(
+		{ limit: 100, order },
+		{
+			// pollingInterval: 1000,
+		}
+	);
 
 	const [createPost, { error: createError, isLoading: isCreateLoading }] =
 		postApi.useCreatePostMutation();
@@ -70,13 +74,14 @@ const PostContainer = (): JSX.Element => {
 				{/* <button onClick={handleCreate}>add post</button> */}
 				{isLoading && <h1>Идет загрузка постов ...</h1>}
 				{error && <h1>Произошла ошибка</h1>}
-				{posts?.map((post) => {
+				{posts?.map((post, i) => {
 					return (
 						<PostItem
 							remove={handleRemove}
 							update={handleUpdate}
 							key={post.id}
 							post={post}
+							number={i}
 						/>
 					);
 				})}
