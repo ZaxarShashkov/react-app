@@ -6,7 +6,7 @@ export const postApi = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
 	tagTypes: ['Post'],
 	endpoints: (build) => ({
-		fetchAllPosts: build.query<IPost[], { limit: number; order: string }>({
+		fetchAllPosts: build.query<IPost[], { limit: number; order: string | undefined }>({
 			query: (arg) => {
 				const { limit, order } = arg;
 				return {

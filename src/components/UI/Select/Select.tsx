@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEvent } from 'react';
 import styles from './Select.module.scss';
 import cn from 'classnames';
 
-type Props = {};
+type SelectProps = {
+	setOrder: (e: string | undefined) => void;
+	order: string | undefined;
+};
 
-const Select = (props: Props): JSX.Element => {
+const Select = ({ order, setOrder }: SelectProps): JSX.Element => {
 	const [isVisible, setIsVisible] = useState<boolean>(false);
-	console.log(isVisible);
+
 	const onVisible = () => {
 		setIsVisible((isVisible) => !isVisible);
+	};
+
+	const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+		setOrder(e.currentTarget.dataset.sort);
+		setIsVisible(false);
 	};
 
 	return (
@@ -17,13 +25,9 @@ const Select = (props: Props): JSX.Element => {
 				<div className={styles.selectDate__container}>
 					<div className={styles.selectDate__select} onClick={onVisible}>
 						<div className={styles.selectDate__date}>
-							<span>asd</span>
+							<span>{order === 'desc' ? 'First new' : 'Old ones first'}</span>
 						</div>
 						<div
-							// className={cn({
-							// 	select__arrowOpen: isVisible,
-							// 	select__arrow: !isVisible,
-							// })}
 							className={cn({
 								[styles.select__arrowOpen]: isVisible,
 								[styles.select__arrow]: !isVisible,
@@ -46,20 +50,20 @@ const Select = (props: Props): JSX.Element => {
 				</div>
 				{isVisible && (
 					<div className={styles.selectDate__dropdown}>
-						<React.Fragment key={'asd'}>
+						<React.Fragment key={'First new'}>
 							<div
 								className={styles.selectDate__item}
-								// onClick={(e) => onClickListMonth(months.value, e)}
-							>
-								<div className={styles.selectDate__date}>Asc</div>
+								data-sort='desc'
+								onClick={(e) => handleClick(e)}>
+								<div className={styles.selectDate__date}>First new</div>
 							</div>
 						</React.Fragment>
-						<React.Fragment key={'asd'}>
+						<React.Fragment key={'Old ones first'}>
 							<div
 								className={styles.selectDate__item}
-								// onClick={(e) => onClickListMonth(months.value, e)}
-							>
-								<div className={styles.selectDate__date}>Desc</div>
+								onClick={(e) => handleClick(e)}
+								data-sort='asc'>
+								<div className={styles.selectDate__date}>Old ones first</div>
 							</div>
 						</React.Fragment>
 					</div>

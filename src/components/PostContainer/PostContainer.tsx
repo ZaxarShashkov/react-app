@@ -14,7 +14,7 @@ interface NewPost {
 
 const PostContainer = (): JSX.Element => {
 	const [newPost, setNewPost] = useState<NewPost>({ title: '', body: '' });
-	const [order, setOrder] = useState<string>('desc');
+	const [order, setOrder] = useState<string | undefined>('desc');
 
 	const {
 		data: posts,
@@ -70,7 +70,7 @@ const PostContainer = (): JSX.Element => {
 					value={newPost.body}
 					onChange={handleChangeBody}
 				/>
-				<Select />
+				<Select setOrder={setOrder} order={order} />
 			</div>
 			<div className={styles.container}>
 				{/* <button onClick={handleCreate}>add post</button> */}
