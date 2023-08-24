@@ -1,4 +1,11 @@
-import React, { useState, MouseEvent } from 'react';
+import React, {
+	useState,
+	MouseEvent,
+	useEffect,
+	useRef,
+	DetailedHTMLProps,
+	HTMLAttributes,
+} from 'react';
 import styles from './Select.module.scss';
 import cn from 'classnames';
 
@@ -19,12 +26,26 @@ const Select = ({ order, setOrder }: SelectProps): JSX.Element => {
 		setIsVisible(false);
 	};
 
+	const positionRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		document.addEventListener('click', handleClickOutside, { capture: true });
+		return () => document.removeEventListener('click', handleClickOutside, { capture: true });
+	}, [handleClickOutside, isVisible]);
+
+	function handleClickOutside(e: any /*MouseEvent<HTMLElement>*/) {
+		const { current } = positionRef;
+		if (current && !current.contains(e.target as HTMLElement) && isVisible) {
+			setIsVisible(false);
+		}
+	}
+
 	return (
-		<div className={styles.select__container}>
-			<div className={styles.selectDate}>
-				<div className={styles.selectDate__container}>
-					<div className={styles.selectDate__select} onClick={onVisible}>
-						<div className={styles.selectDate__date}>
+		<div className={styles.select__container} ref={positionRef}>
+			<div className={styles.select}>
+				<div className={styles.select__container}>
+					<div className={styles.select__select} onClick={onVisible}>
+						<div className={styles.select__date}>
 							<span>{order === 'desc' ? 'First new' : 'Old ones first'}</span>
 						</div>
 						<div
@@ -49,21 +70,51 @@ const Select = ({ order, setOrder }: SelectProps): JSX.Element => {
 					</div>
 				</div>
 				{isVisible && (
-					<div className={styles.selectDate__dropdown}>
+					<div className={styles.select__dropdown}>
 						<React.Fragment key={'First new'}>
 							<div
-								className={styles.selectDate__item}
+								className={styles.select__item}
 								data-sort='desc'
 								onClick={(e) => handleClick(e)}>
-								<div className={styles.selectDate__date}>First new</div>
+								<div className={styles.select__date}>First new</div>
+								{order === 'desc' ? (
+									<svg
+										width='18'
+										height='18'
+										viewBox='0 0 18 18'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'>
+										<path
+											fillRule='evenodd'
+											clipRule='evenodd'
+											d='M16.8687 3.66222C17.0552 3.86582 17.0414 4.1821 16.8378 4.36865L5.92408 14.3687C5.73294 14.5438 5.43965 14.5438 5.24851 14.3687L1.16222 10.6245C0.95862 10.4379 0.944801 10.1216 1.13135 9.91803C1.31791 9.71443 1.63419 9.70062 1.83779 9.88717L5.5863 13.3218L16.1622 3.63135C16.3658 3.4448 16.6821 3.45862 16.8687 3.66222Z'
+											fill='#407BFF'
+										/>
+									</svg>
+								) : null}
 							</div>
 						</React.Fragment>
 						<React.Fragment key={'Old ones first'}>
 							<div
-								className={styles.selectDate__item}
+								className={styles.select__item}
 								onClick={(e) => handleClick(e)}
 								data-sort='asc'>
-								<div className={styles.selectDate__date}>Old ones first</div>
+								<div className={styles.select__date}>Old ones first</div>
+								{order === 'asc' ? (
+									<svg
+										width='18'
+										height='18'
+										viewBox='0 0 18 18'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'>
+										<path
+											fillRule='evenodd'
+											clipRule='evenodd'
+											d='M16.8687 3.66222C17.0552 3.86582 17.0414 4.1821 16.8378 4.36865L5.92408 14.3687C5.73294 14.5438 5.43965 14.5438 5.24851 14.3687L1.16222 10.6245C0.95862 10.4379 0.944801 10.1216 1.13135 9.91803C1.31791 9.71443 1.63419 9.70062 1.83779 9.88717L5.5863 13.3218L16.1622 3.63135C16.3658 3.4448 16.6821 3.45862 16.8687 3.66222Z'
+											fill='#407BFF'
+										/>
+									</svg>
+								) : null}
 							</div>
 						</React.Fragment>
 					</div>

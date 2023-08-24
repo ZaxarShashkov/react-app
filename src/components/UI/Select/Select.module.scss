@@ -1,9 +1,5 @@
 @import '../../../styles/variables.scss';
 
-.select__container {
-	width: 500px;
-}
-
 .select {
 	&__arrow,
 	&__arrowOpen {
@@ -20,24 +16,25 @@
 	}
 }
 
-.selectDate {
+.select {
 	font-family: 'Red Hat Display';
 	position: relative;
-	width: 100%;
+	width: 250px;
 	&__container {
 		display: flex;
 		column-gap: 15px;
 		position: relative;
+		margin-top: 10px;
 	}
 	&__select {
 		position: relative;
 		flex: 1 0 120px;
-		height: 48px;
+		height: 30px;
 		font-size: 14px;
 		line-height: 1.5;
-		border-radius: 15px;
+		border-radius: 15px 15px 0 0;
 		background-color: var(--grey-light);
-		padding: 5px;
+		padding: 7px 0 0px 10px;
 		border: 1px solid transparent;
 		width: 100%;
 		font-weight: 400;
@@ -71,6 +68,7 @@
 	}
 
 	&__dropdown {
+		position: absolute;
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
@@ -78,10 +76,9 @@
 		padding: 10px 6px;
 		max-height: 290px;
 		background-color: var(--grey-light);
-		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-		border-radius: 15px;
+		border-radius: 0 0 15px 15px;
 		overflow-y: auto;
-		width: 500px;
+		width: 250px;
 		z-index: 4;
 		&::-webkit-scrollbar {
 			width: 4px;
@@ -126,5 +123,3 @@
 		}
 	}
 }
-
-
