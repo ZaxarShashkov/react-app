@@ -1,13 +1,11 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from '../Layout/Layout.module.scss';
 import { NavLink } from 'react-router-dom';
+import styles from '../Layout/Layout.module.scss';
 
-type Props = {
-	className: string;
-};
+type Props = {};
 
-const Header = ({ className }: Props) => {
+const Header = () => {
 	return (
 		<>
 			<header className={styles.header}>

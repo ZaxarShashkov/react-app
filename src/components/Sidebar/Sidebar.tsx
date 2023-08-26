@@ -2,11 +2,7 @@ import React from 'react';
 import styles from '../Layout/Layout.module.scss';
 import { NavLink } from 'react-router-dom';
 
-type SidebarProps = {
-	className: string;
-};
-
-const Sidebar = ({ className }: SidebarProps) => {
+const Sidebar = () => {
 	return (
 		<div className={styles.sidebar}>
 			<nav className={styles.main__nav}>

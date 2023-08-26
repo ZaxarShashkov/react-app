@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styles from './styles/App.scss';
+import styles from './components/Layout/Layout.module.scss';
 import { fetchUsers, userSlice } from './store/reducers/UserSlice';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import PostPage from './components/Pages/PostPage';
@@ -21,8 +21,12 @@ function App(): JSX.Element {
 		<Router>
 			<div className='App'>
 				<div className={styles.wrapper}>
-					<Header className={styles.header} />
-					<Sidebar className={styles.sidebar} />
+					<div className={styles.header}>
+						<Header />
+					</div>
+					<div className={styles.sidebar}>
+						<Sidebar />
+					</div>
 					<main className={styles.main}>
 						<Routes>
 							<Route path='/' element={<PostPage />} />

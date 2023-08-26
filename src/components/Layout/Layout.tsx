@@ -7,15 +7,15 @@ type LayoutProps = {
 	children: ReactNode;
 };
 
-const Layout = ({ children }: LayoutProps): JSX.Element => {
-	return (
-		<div className={styles.wrapper}>
-			<Header className={styles.header} />
-			<Sidebar className={styles.sidebar} />
-			<main className={styles.main}>{children}</main>
-			<footer className={styles.footer}>footer</footer>
-		</div>
-	);
-};
+// const Layout = ({ children }: LayoutProps): JSX.Element => {
+// 	return (
+// 		<div className={styles.wrapper}>
+// 			<Header className={styles.header} />
+// 			<Sidebar className={styles.sidebar} />
+// 			<main className={styles.main}>{children}</main>
+// 			<footer className={styles.footer}>footer</footer>
+// 		</div>
+// 	);
+// };
 
-export default Layout;
+// export default Layout;

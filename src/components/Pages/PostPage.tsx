@@ -1,5 +1,4 @@
 import React from 'react';
-import Layout from '../Layout/Layout';
 import PostContainer from '../PostContainer/PostContainer';
 
 type Props = {};
