@@ -2,37 +2,33 @@ import React, { ChangeEvent } from 'react';
 import styles from './Modal.module.scss';
 import cn from 'classnames';
 import Button from '../Button/Button';
-import { ChangePost } from '../../PostItem/PostItem';
 import { IPost } from '../../../interfaces/IPost';
 
-type ModalProps = {
-	isVisible: boolean;
-	changePost: ChangePost;
-	setIsVisible: (isVisible: boolean) => void;
-	setChangePost: (changePost: ChangePost) => void;
-	update: (post: IPost) => void;
-	post: IPost ;
+type IValue = {
+	title: string;
+	body: string;
 };
 
-const Modal = ({
-	isVisible,
-	setIsVisible,
-	changePost,
-	setChangePost,
-	update,
-	post,
-}: ModalProps) => {
-	const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-		setChangePost({ ...changePost, title: e.currentTarget.value });
+type ModalCreateProps = {
+	isVisible: boolean;
+	value: IValue;
+	setIsVisible: (isVisible: boolean) => void;
+	setNewPost: (changePost: IValue) => void;
+	create: ({ title, body }: IPost) => void;
+};
+
+const ModalCreate = ({ isVisible, setIsVisible, value, setNewPost, create }: ModalCreateProps) => {
+	const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+		setNewPost({ ...value, title: e.currentTarget.value });
 	};
 
-	const onChangeBody = (e: ChangeEvent<HTMLInputElement>) => {
-		setChangePost({ ...changePost, body: e.currentTarget.value });
+	const handleChangeBody = (e: ChangeEvent<HTMLInputElement>) => {
+		setNewPost({ ...value, body: e.currentTarget.value });
 	};
 
-	const handleUpdate = () => {
-		const { title, body } = changePost;
-		update({ ...post, title, body });
+	const handleCreate = async () => {
+		await create({ title: value.title, body: value.body } as IPost);
+		setNewPost({ title: '', body: '' });
 		setIsVisible(false);
 	};
 
@@ -52,27 +48,28 @@ const Modal = ({
 					<input
 						id='title'
 						type='text'
-						defaultValue={changePost.title}
+						value={value.title}
 						className={styles.modal__input}
 						placeholder='Enter your title post'
-						onChange={onChangeTitle}
+						onChange={handleChangeTitle}
 						autoComplete='false'
 					/>
 				</div>
+
 				<div className={styles.modal__text}>
 					<label htmlFor='body'>Body</label>
 					<input
 						id='body'
 						type='text'
-						defaultValue={changePost.body}
+						value={value.body}
 						className={styles.modal__input}
 						placeholder='Enter your body post'
-						onChange={onChangeBody}
+						onChange={handleChangeBody}
 						autoComplete='false'
 					/>
 				</div>
 				<div className={styles.modal__buttons}>
-					<Button title={'save'} onClick={handleUpdate} />
+					<Button title={'save'} onClick={handleCreate} />
 					<Button title={'back'} onClick={(isVisible) => setIsVisible(!isVisible)} />
 				</div>
 			</div>
@@ -80,4 +77,4 @@ const Modal = ({
 	);
 };
 
-export default Modal;
+export default ModalCreate;

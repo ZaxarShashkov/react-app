@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import styles from './components/Layout/Layout.module.scss';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { fetchUsers, userSlice } from './store/reducers/UserSlice';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
+
 import PostPage from './components/Pages/PostPage';
 import UserPage from './components/Pages/UserPage';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
+
+import styles from './components/Layout/Layout.module.scss';
 
 function App(): JSX.Element {
 	const dispatch = useAppDispatch();
