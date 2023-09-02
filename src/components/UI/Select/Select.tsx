@@ -24,6 +24,7 @@ const Select = ({ order, setOrder }: SelectProps): JSX.Element => {
 	const handleClick = (e: MouseEvent<HTMLDivElement>) => {
 		setOrder(e.currentTarget.dataset.sort);
 		setIsVisible(false);
+		
 	};
 
 	const positionRef = useRef<HTMLDivElement | null>(null);

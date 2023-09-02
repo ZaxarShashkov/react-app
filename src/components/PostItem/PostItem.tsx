@@ -4,6 +4,8 @@ import styles from './PostItem.module.scss';
 import Button from '../UI/Button/Button';
 import Paragraph from '../UI/Paragraph/Paragraph';
 import Modal from '../UI/Modal/Modal';
+import { postApi } from '../../services/PostService';
+import { IComments } from '../../interfaces/IComment';
 
 type PropsPost = {
 	post: IPost;
@@ -30,6 +32,16 @@ const PostItem = ({ post, remove, update, number }: PropsPost) => {
 		setIsVisible(true);
 	};
 
+	const { data: comments, isLoading, error } = postApi.useFetchCommentForPostQuery({});
+
+	const checkComments = () => {
+		comments.forEach((comment: IComments) => {
+			if (post.id === comment.postId) {
+				console.log(comment.name);
+			}
+		});
+	};
+
 	return (
 		<div className={styles.post__container}>
 			<div className={styles.post__title_block}>
@@ -40,6 +52,7 @@ const PostItem = ({ post, remove, update, number }: PropsPost) => {
 			<div className={styles.post__footer}>
 				<Button title='Remove' onClick={handleRemove} />
 				<Button title='Change post' onClick={onVisible} />
+				<Button title='Comments' onClick={checkComments} />
 			</div>
 
 			<Modal

@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { IPost } from '../interfaces/IPost';
+import { IComments } from '../interfaces/IComment';
 
 export const postApi = createApi({
 	reducerPath: 'postAPI',
@@ -42,6 +43,16 @@ export const postApi = createApi({
 				method: 'DELETE',
 			}),
 			invalidatesTags: ['Post'],
+		}),
+		fetchCommentForPost: build.query({
+			query: () => {
+				return {
+					url: '/comments',
+					params: {
+						// _limit: limit,
+					},
+				};
+			},
 		}),
 	}),
 });
