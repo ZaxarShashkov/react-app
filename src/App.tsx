@@ -9,6 +9,7 @@ import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 
 import styles from './components/Layout/Layout.module.scss';
+import Footer from './components/Footer/Footer';
 
 function App(): JSX.Element {
 	const dispatch = useAppDispatch();
@@ -35,7 +36,9 @@ function App(): JSX.Element {
 							<Route path='/users' element={<UserPage />} />
 						</Routes>
 					</main>
-					<footer className={styles.footer}>footer</footer>
+					<footer className={styles.footer}>
+						<Footer />
+					</footer>
 				</div>
 			</div>
 		</Router>

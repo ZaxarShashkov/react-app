@@ -12,13 +12,16 @@ const Header = () => {
 				<nav className={styles.header__nav}>
 					<ul className={styles.menu__list}>
 						<li className={styles.menu__item}>Home Page</li>
-						<li className={styles.menu__item}>Posts</li>
 						<li className={styles.menu__item}>
-							<NavLink end to='/Users'>
+							<NavLink end to='/' className={styles.menu__item}>
+								Posts
+							</NavLink>
+						</li>
+						<li className={styles.menu__item}>
+							<NavLink end to='/Users' className={styles.menu__item}>
 								Users
 							</NavLink>
 						</li>
-						<li className={styles.menu__item}>Etc</li>
 					</ul>
 				</nav>
 			</header>

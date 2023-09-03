@@ -10,7 +10,7 @@
 	grid-template-areas:
 		'. header header .'
 		'. sidebar main .'
-		'. footer footer . ';
+		'. sidebar footer . ';
 }
 
 .header {
@@ -73,16 +73,18 @@
 
 .menu {
 	&__list {
-		padding: 10px;
-		margin: 0;
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		gap: 50px;
+		justify-content: space-around;
+		list-style: none;
+		text-decoration: none;
+		font-size: 16px;
+		gap: 10px;
 	}
 	&__item {
-		font-size: 20px;
-		list-style: none;
-		color: var(--white);
+		color: var(--black);
+		font-size: 16px;
+		text-decoration: none;
+		cursor: pointer;
 	}
 }

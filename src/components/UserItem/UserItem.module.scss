@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.user {
+	&__container {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 50px 50px;
+		border: 1px solid var(--grey-light);
+		padding: 10px;
+		border-radius: 6px;
+	}
+}
