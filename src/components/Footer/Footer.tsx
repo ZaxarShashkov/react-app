@@ -7,7 +7,7 @@ type Props = {};
 const Footer = (props: Props) => {
 	return (
 		<div className={styles.footer}>
-			<Paragraph text='© 2001—2023 Onlíner' />
+			<Paragraph text='© 2001—2023 ' />
 		</div>
 	);
 };

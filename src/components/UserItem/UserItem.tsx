@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './UserItem.module.scss';
 import { IUser } from '../../interfaces/IUser';
+import Paragraph from '../UI/Paragraph/Paragraph';
 
 type Props = {
 	user: IUser;
@@ -9,8 +10,8 @@ type Props = {
 const UserItem = ({ user }: Props) => {
 	return (
 		<div className={styles.user__container}>
-			{`${user.id}. ${user.name}`}
-			<div>{user.email}</div>
+			<Paragraph text={`${user.id}. ${user.name}`} />
+			<Paragraph text={user.email} />
 		</div>
 	);
 };

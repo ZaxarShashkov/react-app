@@ -50,20 +50,20 @@ const PostItem = ({ post, remove, update, number }: PropsPost) => {
 				[styles.post__container_comments]: commentVisible,
 			})}>
 			<div className={styles.post__title_block}>
-				<Paragraph text={number + 1 + ':'} />
 				<Paragraph
-					text={post.title.substring(0, 1).toUpperCase() + post.title.substring(1)}
+					text={`${number + 1}. ${post.title
+						.substring(0, 1)
+						.toUpperCase()}${post.title.substring(1)}`}
 				/>
 			</div>
 			<div className={styles.post__body}>
 				<Paragraph text={post.body} size={'small'} />
 				{!commentVisible && isLoading && <Spinner />}
 				{commentVisible
-					? comments.map((comment: IComments): JSX.Element | undefined => {
+					? comments?.map((comment: IComments): JSX.Element | undefined => {
 							if (post.id === comment.postId) {
-								console.log(comment.postId);
 								return (
-									<div className={styles.post__comments}>
+									<div className={styles.post__comments} key={comment.id}>
 										<Paragraph text={comment.email} size={'small'} />
 										<Paragraph text={comment.name} size={'small'} />
 									</div>
