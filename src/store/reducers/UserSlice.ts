@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '../../interfaces/IUser';
 import axios from 'axios';
 import { AppDispatch } from '../store';
+import { IPost } from '../../interfaces/IPost';
 
 interface UserState {
 	users: IUser[];
@@ -17,19 +18,9 @@ const initialState: UserState = {
 	count: 0,
 };
 
-// export const fetchUsers = async (dispatch: AppDispatch) => {
-// 	try {
-// 		dispatch(userSlice.actions.usersFetching());
-// 		const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
-// 		dispatch(userSlice.actions.usersFetchingSuccess(response.data));
-// 	} catch (e: any) {
-// 		dispatch(userSlice.actions.usersFetchingError(e.message));
-// 	}
-// };
-
 export const fetchUsers = createAsyncThunk('user/fetchAll', async (_, thunkAPI) => {
 	try {
-		const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
+		const response = await axios.get<IUser[]>('http://localhost:3001/users');
 		return response.data;
 	} catch (e) {
 		return thunkAPI.rejectWithValue('Не удалось загрузить посты');
@@ -43,18 +34,13 @@ export const userSlice = createSlice({
 		increment(state, action: PayloadAction<number>) {
 			state.count += action.payload;
 		},
-		// usersFetching(state) {
-		// 	state.isLoading = true;
-		// },
-		// usersFetchingSuccess(state, action: PayloadAction<IUser[]>) {
-		// 	state.isLoading = false;
-		// 	state.error = '';
-		// 	state.users = action.payload;
-		// },
-		// usersFetchingError(state, action: PayloadAction<string>) {
-		// 	state.isLoading = false;
-		// 	state.error = action.payload;
-		// },
+		sort(state, action: PayloadAction<boolean>) {
+			if (action.payload) {
+				state.users.sort((a, b) => b.id - a.id);
+			} else if (!action.payload) {
+				state.users.sort((a, b) => a.id - b.id);
+			}
+		},
 	},
 	extraReducers: (builder) => {
 		builder
