@@ -1,5 +1,5 @@
 {
-  "posts": [{
+  "posts": [ {
     "userId": 1,
     "id": 1,
     "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
@@ -599,43 +599,7 @@
     "title": "at nam consequatur ea labore ea harum",
     "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
   }],
-  "comments": [
-    {
-      "postId": 4,
-      "id": 4,
-      "name": "alias odio sit",
-      "email": "Lew@alysha.tv",
-      "body": "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati"
-    },
-    {
-      "postId": 5,
-      "id": 5,
-      "name": "vero eaque aliquid doloribus et culpa",
-      "email": "Hayden@althea.biz",
-      "body": "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et"
-    },
-    {
-      "postId": 7,
-      "id": 7,
-      "name": "repellat consequatur praesentium vel minus molestias voluptatum",
-      "email": "Dallas@ole.me",
-      "body": "maiores sed dolores similique labore et inventore et\nquasi temporibus esse sunt id et\neos voluptatem aliquam\naliquid ratione corporis molestiae mollitia quia et magnam dolor"
-    },
-    {
-      "postId": 8,
-      "id": 8,
-      "name": "et omnis dolorem",
-      "email": "Mallory_Kunze@marie.org",
-      "body": "ut voluptatem corrupti velit\nad voluptatem maiores\net nisi velit vero accusamus maiores\nvoluptates quia aliquid ullam eaque"
-    },
-    {
-      "postId": 9,
-      "id": 9,
-      "name": "provident id voluptas",
-      "email": "Meghan_Littel@rene.us",
-      "body": "sapiente assumenda molestiae atque\nadipisci laborum distinctio aperiam et ab ut omnis\net occaecati aspernatur odit sit rem expedita\nquas enim ipsam minus"
-    }
-  ],
+  "comments": [],
   "users": [ {
     "id": 1,
     "name": "Leanne Graham",
