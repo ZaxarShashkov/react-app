@@ -35,6 +35,10 @@ const UserContainer = (props: UserProps) => {
 		dispatch(sortByName(byName));
 	}, [byName]);
 
+	const handleDelete = (user: number) => {
+		dispatch(deleteUser(user));
+	};
+
 	return (
 		<div className={style.container}>
 			<div className='div'>
@@ -42,8 +46,8 @@ const UserContainer = (props: UserProps) => {
 				<Button title={'Sort by name'} onClick={sortName} />
 			</div>
 			{!isLoading &&
-				users?.map((user) => {
-					return <UserItem key={user.id} user={user} />;
+				users?.map((user, i) => {
+					return <UserItem key={user.id} user={user} number={i} handleDelete={handleDelete}/>;
 				})}
 		</div>
 	);

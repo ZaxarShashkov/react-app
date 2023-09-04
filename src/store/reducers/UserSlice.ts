@@ -27,9 +27,9 @@ export const fetchUsers = createAsyncThunk('user/fetchAll', async (_, thunkAPI) 
 	}
 });
 
-export const deleteUser = createAsyncThunk('user/deleteUser', async (user, thunkAPI) => {
+export const deleteUser = createAsyncThunk('user/deleteUser', async (userId: number, thunkAPI) => {
 	try {
-		const response = await axios.delete<IUser>(`http://localhost:3001/users/${user}`);
+		const response = await axios.delete<IUser>(`http://localhost:3001/users/${userId}`);
 		return response.data;
 	} catch (e) {
 		thunkAPI.rejectWithValue('Не удалось удалить пользователя!!!');
@@ -72,7 +72,7 @@ export const userSlice = createSlice({
 				state.isLoading = false;
 				state.error = action.payload;
 			})
-			.addCase(deleteUser.fulfilled, (state, action: PayloadAction<any>) => {
+			.addCase(deleteUser.fulfilled, (state, action: PayloadAction<IPost | any>) => {
 				state.users.filter((user) => user.id !== action.payload.id);
 			})
 			.addCase(deleteUser.rejected, (state, action: PayloadAction<string | unknown>) => {
