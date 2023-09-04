@@ -44,7 +44,7 @@ const UserContainer = (props: UserProps) => {
 
 	const handleDelete = (user: number) => {
 		dispatch(deleteUser(user));
-		dispatch(fetchUsers());
+		// dispatch(fetchUsers());
 	};
 
 	const handleAddUser = async () => {
