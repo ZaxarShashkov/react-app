@@ -1,5 +1,5 @@
+import { IUser } from './../../interfaces/IUser';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../../interfaces/IUser';
 import axios from 'axios';
 import { AppDispatch } from '../store';
 import { IPost } from '../../interfaces/IPost';
@@ -27,6 +27,15 @@ export const fetchUsers = createAsyncThunk('user/fetchAll', async (_, thunkAPI) 
 	}
 });
 
+export const deleteUser = createAsyncThunk('user/deleteUser', async (user, thunkAPI) => {
+	try {
+		const response = await axios.delete<IUser>(`http://localhost:3001/users/${user}`);
+		return response.data;
+	} catch (e) {
+		thunkAPI.rejectWithValue('Не удалось удалить пользователя!!!');
+	}
+});
+
 export const userSlice = createSlice({
 	name: 'user',
 	initialState: initialState,
@@ -39,6 +48,13 @@ export const userSlice = createSlice({
 				state.users.sort((a, b) => b.id - a.id);
 			} else if (!action.payload) {
 				state.users.sort((a, b) => a.id - b.id);
+			}
+		},
+		sortByName(state, action: PayloadAction<boolean>) {
+			if (action.payload) {
+				state.users.sort((a, b) => (a.name < b.name ? -1 : 1));
+			} else if (!action.payload) {
+				state.users.sort((a, b) => (a.name > b.name ? -1 : 1));
 			}
 		},
 	},
@@ -54,6 +70,12 @@ export const userSlice = createSlice({
 			})
 			.addCase(fetchUsers.rejected, (state, action: PayloadAction<string | unknown>) => {
 				state.isLoading = false;
+				state.error = action.payload;
+			})
+			.addCase(deleteUser.fulfilled, (state, action: PayloadAction<any>) => {
+				state.users.filter((user) => user.id !== action.payload.id);
+			})
+			.addCase(deleteUser.rejected, (state, action: PayloadAction<string | unknown>) => {
 				state.error = action.payload;
 			});
 	},

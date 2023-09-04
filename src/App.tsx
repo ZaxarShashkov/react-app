@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { fetchUsers, userSlice } from './store/reducers/UserSlice';
-import { useAppDispatch, useAppSelector } from './hooks/redux';
 
 import PostPage from './components/Pages/PostPage';
 import UserPage from './components/Pages/UserPage';
@@ -12,14 +9,6 @@ import styles from './components/Layout/Layout.module.scss';
 import Footer from './components/Footer/Footer';
 
 function App(): JSX.Element {
-	const dispatch = useAppDispatch();
-	const { count, isLoading, error, users } = useAppSelector((state) => state.userReducer);
-	const { increment } = userSlice.actions;
-
-	useEffect(() => {
-		dispatch(fetchUsers());
-	}, []);
-
 	return (
 		<Router>
 			<div className='App'>
