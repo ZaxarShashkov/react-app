@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react';
 import style from './UserContainer.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import UserItem from '../UserItem/UserItem';
-import { userSlice, fetchUsers, deleteUser } from '../../store/reducers/UserSlice';
+import { userSlice, fetchUsers, deleteUser, addUser } from '../../store/reducers/UserSlice';
 import Button from '../UI/Button/Button';
+import { IPost } from '../../interfaces/IPost';
+import { IUser } from '../../interfaces/IUser';
 
 type UserProps = {};
 
 const UserContainer = (props: UserProps) => {
 	const [toSort, setToSort] = useState<boolean>(false);
 	const [byName, setByName] = useState<boolean>(false);
+	const [newUser, setNewUser] = useState<IUser>({
+		id: 1,
+		name: 'Zakhar',
+		email: 'zekharjah@gmail.com',
+	});
 
 	const dispatch = useAppDispatch();
 	const { users, isLoading, error } = useAppSelector((state) => state.userReducer);
@@ -40,11 +47,21 @@ const UserContainer = (props: UserProps) => {
 		dispatch(fetchUsers());
 	};
 
+	const handleAddUser = async () => {
+		await dispatch(
+			addUser({ id: newUser.id, name: newUser.name, email: newUser.email } as IUser)
+		);
+	};
+
+	console.log(newUser);
+	console.log(users);
+
 	return (
 		<div className={style.container}>
 			<div className='div'>
 				<Button title={toSort ? 'Ascending' : 'Descending'} onClick={sortById} />
 				<Button title={'Sort by name'} onClick={sortName} />
+				<Button title={'Add user'} onClick={handleAddUser} />
 			</div>
 			{!isLoading &&
 				users?.map((user, i) => {

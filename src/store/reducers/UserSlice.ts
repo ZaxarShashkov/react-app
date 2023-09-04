@@ -36,6 +36,15 @@ export const deleteUser = createAsyncThunk('user/deleteUser', async (userId: num
 	}
 });
 
+export const addUser = createAsyncThunk('user/addUser', async (user: IUser, thunkAPI) => {
+	try {
+		const response = await axios.post<IUser>('http://localhost:3001/users', user);
+		return response.data;
+	} catch (e) {
+		thunkAPI.rejectWithValue('Не удалось добавить пользователя');
+	}
+});
+
 export const userSlice = createSlice({
 	name: 'user',
 	initialState: initialState,
@@ -77,7 +86,11 @@ export const userSlice = createSlice({
 			})
 			.addCase(deleteUser.rejected, (state, action: PayloadAction<string | unknown>) => {
 				state.error = action.payload;
-			});
+			})
+			.addCase(addUser.fulfilled, (state, action: PayloadAction<IUser | any>) => {
+				state.users.push(action.payload);
+			})
+			.addDefaultCase(() => {});
 	},
 });
 
