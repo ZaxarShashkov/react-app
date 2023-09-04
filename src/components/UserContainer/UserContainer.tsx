@@ -37,6 +37,7 @@ const UserContainer = (props: UserProps) => {
 
 	const handleDelete = (user: number) => {
 		dispatch(deleteUser(user));
+		dispatch(fetchUsers());
 	};
 
 	return (
@@ -47,7 +48,14 @@ const UserContainer = (props: UserProps) => {
 			</div>
 			{!isLoading &&
 				users?.map((user, i) => {
-					return <UserItem key={user.id} user={user} number={i} handleDelete={handleDelete}/>;
+					return (
+						<UserItem
+							key={user.id}
+							user={user}
+							number={i}
+							handleDelete={handleDelete}
+						/>
+					);
 				})}
 		</div>
 	);

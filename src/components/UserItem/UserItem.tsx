@@ -12,8 +12,6 @@ type UserItem = {
 };
 
 const UserItem = ({ user, number, handleDelete }: UserItem) => {
-	const dispatch = useAppDispatch();
-
 	return (
 		<div className={styles.user__container}>
 			<Paragraph text={`${number + 1}. ${user.name}`} />
