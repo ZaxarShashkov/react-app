@@ -2,8 +2,6 @@ import React from 'react';
 import styles from './UserItem.module.scss';
 import { IUser } from '../../interfaces/IUser';
 import Paragraph from '../UI/Paragraph/Paragraph';
-import { useAppDispatch } from '../../hooks/redux';
-import { deleteUser } from '../../store/reducers/UserSlice';
 
 type UserItem = {
 	user: IUser;

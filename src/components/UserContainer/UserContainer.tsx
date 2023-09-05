@@ -53,9 +53,6 @@ const UserContainer = (props: UserProps) => {
 		);
 	};
 
-	console.log(newUser);
-	console.log(users);
-
 	return (
 		<div className={style.container}>
 			<div className='div'>
