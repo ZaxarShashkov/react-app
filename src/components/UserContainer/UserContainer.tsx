@@ -13,7 +13,7 @@ const UserContainer = (props: UserProps) => {
 	const [toSort, setToSort] = useState<boolean>(false);
 	const [byName, setByName] = useState<boolean>(false);
 	const [newUser, setNewUser] = useState<IUser>({
-		id: 1,
+		id: 15,
 		name: 'Zakhar',
 		email: 'zekharjah@gmail.com',
 	});
@@ -48,9 +48,7 @@ const UserContainer = (props: UserProps) => {
 	};
 
 	const handleAddUser = async () => {
-		await dispatch(
-			addUser({ id: newUser.id, name: newUser.name, email: newUser.email } as IUser)
-		);
+		await dispatch(addUser({ id: 16, name: newUser.name, email: newUser.email } as IUser));
 	};
 
 	return (
