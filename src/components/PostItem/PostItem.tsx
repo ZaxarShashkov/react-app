@@ -44,6 +44,8 @@ const PostItem = ({ post, remove, update, number }: PropsPost) => {
 		setCommentVisible((commentVisible) => !commentVisible);
 	};
 
+	console.log(commentVisible, 'visible');
+
 	return (
 		<div
 			className={cn(styles.post__container, {
@@ -58,21 +60,21 @@ const PostItem = ({ post, remove, update, number }: PropsPost) => {
 			</div>
 			<div className={styles.post__body}>
 				<Paragraph text={post.body} size={'small'} />
-				{!commentVisible && isLoading && <Spinner />}
-				{commentVisible
-					? comments?.map((comment: IComments): JSX.Element | undefined => {
-							if (post.id === comment.postId) {
-								return (
-									<div className={styles.post__comments} key={comment.id}>
-										<Paragraph text={comment.email} size={'small'} />
-										<Paragraph text={comment.name} size={'small'} />
-									</div>
-								);
-							}
-					  })
-					: null}
+				{isLoading && !error && <Spinner />}
+				{error && <Paragraph text='Произшла ошибка' />}
+				{commentVisible &&
+					comments
+						?.filter((item: IComments) => item.postId === post.id)
+						.map((comment: IComments): JSX.Element | undefined => {
+							console.log(comment);
+							return (
+								<div className={styles.post__comments} key={comment.id}>
+									<Paragraph text={comment.email} size={'small'} />
+									<Paragraph text={comment.name} size={'small'} />
+								</div>
+							);
+						})}
 			</div>
-
 			<div className={styles.post__footer}>
 				<Button title='Remove' onClick={handleRemove} />
 				<Button title='Change post' onClick={onVisible} />
